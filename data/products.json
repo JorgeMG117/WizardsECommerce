@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "name": "NBA Jersey",
+        "description": "Official NBA Jersey",
+        "price": 59.99,
+        "stock": 10,
+        "category": "Apparel",
+        "image_url": "https://via.placeholder.com/150"
+    },
+    {
+        "id": 2,
+        "name": "Basketball",
+        "description": "Official NBA Basketball",
+        "price": 29.99,
+        "stock": 15,
+        "category": "Equipment",
+        "image_url": "https://via.placeholder.com/150"
+    }
+]
