@@ -2,6 +2,7 @@ package models
 
 import (
 	"errors"
+	"fmt"
 	"os"
 
 	"github.com/JorgeMG117/WizardsECommerce/utils"
@@ -39,4 +40,19 @@ func GetProducts() ([]Product, error) {
 		return nil, err
 	}
 	return products, nil
+}
+
+func GetProductById(id int) Product {
+    products, err := GetProducts()
+    utils.CheckError(err)
+
+    for _, v := range products {
+        if v.ID == id {
+            return v
+        }
+    }
+    
+    fmt.Println("That product doesnt exist")
+
+    return products[0] 
 }

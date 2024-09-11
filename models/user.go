@@ -1,11 +1,40 @@
 package models
 
+import "github.com/JorgeMG117/WizardsECommerce/utils"
+
 type User struct {
-	ID       int    `json:"id"`
+	ID       uint   `json:"id"`
 	Username string `json:"username"`
 	Password string `json:"password"`
 	Email    string `json:"email"`
 	Role     string `json:"role"`
+}
+
+var userFile string = "data/users.json"
+
+func GetUsers() ([]User, error) {
+	var users []User
+	err := utils.ReadFile(userFile, &users)
+	if err != nil {
+		return nil, err
+	}
+	return users, nil
+}
+
+func CheckUser(username string, password string) *User {
+	var users []User
+	err := utils.ReadFile(userFile, &users)
+	if err != nil {
+		return nil
+	}
+
+	for _, user := range users {
+		if user.Username == username && user.Password == password {
+			return &user
+		}
+	}
+
+	return nil
 }
 
 // func createUser(user User) error {

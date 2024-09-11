@@ -9,6 +9,18 @@
 </head>
 <body>
     <div class="container">
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="#">NBA Store</a>
+            <!-- Cart Icon -->
+            <a href="/cart" class="btn btn-outline-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                    <path d="M0 1a1 1 0 0 1 1-1h1.5a1 1 0 0 1 .97.757L4.89 5H14.5a.5.5 0 0 1 .49.598l-1.5 7A.5.5 0 0 1 13 13H4a.5.5 0 0 1-.49-.598L5 5.5H2L1.61 3.157A1 1 0 0 1 0 2.5V1zm3.21 1l.5 2.5h8.79l1.285 6H5.216L4.286 3H3.21z"/>
+                    <path d="M5.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm7 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                </svg>
+                Go to Cart
+            </a>
+        </nav>
+
         <h1 class="mt-5">NBA Products</h1>
         <div id="product-list" hx-get="/products" hx-trigger="load" hx-target="#product-list" class="row mt-4">
             <!-- Products will be loaded here -->

@@ -6,7 +6,7 @@
         "price": 59.99,
         "stock": 10,
         "category": "Apparel",
-        "image_url": "https://via.placeholder.com/150"
+        "image_url": "https://images.footballfanatics.com/washington-wizards/washington-wizards-nike-city-edition-swingman-jersey-23-black-jordan-poole-unisex_ss5_p-200824317+u-ycetsmxqcsiu9b6xgusj+v-ibk2kdcge0fjndjgfmh0.jpg?_hv=2&w=340"
     },
     {
         "id": 2,
@@ -15,6 +15,15 @@
         "price": 29.99,
         "stock": 15,
         "category": "Equipment",
-        "image_url": "https://via.placeholder.com/150"
+        "image_url": "https://images.footballfanatics.com/washington-wizards/washington-wizards-wilson-nba-city-edition-2023-basketball-size-7_ss5_p-13389957+u-hkhhtxkmcyicryihvyfx+v-wrox0h1m9xwlfosywzmu.jpg?_hv=2&w=340"
+    },
+    {
+        "id": 3,
+        "name": "Beanie",
+        "description": "Official NBA Beanie",
+        "price": 19.99,
+        "stock": 15,
+        "category": "Apparel",
+        "image_url": "https://images.footballfanatics.com/washington-wizards/washington-wizards-new-era-city-edition-2022-knit-mens_ss4_p-13326084+u-1ihy55ceo9jdlvuq907k+v-134bdc51462e4564a319b9ad7732173a.jpg?_hv=2&w=340"
     }
 ]

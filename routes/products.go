@@ -17,10 +17,6 @@ func (s *Server) Products(w http.ResponseWriter, r *http.Request) {
 		products, _ := models.GetProducts()
 
 		s.mutex.Unlock()
-		// TODO: Create checkError function
-		// if err != nil {
-
-		// }
 
 		tmpl := template.Must(template.New("products").Parse(`
 			{{range .}}
@@ -31,7 +27,7 @@ func (s *Server) Products(w http.ResponseWriter, r *http.Request) {
 							<h5 class="card-title">{{.Name}}</h5>
 							<p class="card-text">{{.Description}}</p>
 							<p class="card-text">$ {{.Price}}</p>
-							<a href="#" class="btn btn-primary">Add to Cart</a>
+							<a class="btn btn-primary" hx-post="/add-to-cart" hx-swap="none" hx-headers='{"Content-Type": "application/json"}' hx-vals='{"Id": {{.ID}}}'>Add to Cart</a>
 						</div>
 					</div>
 				</div>
@@ -40,9 +36,6 @@ func (s *Server) Products(w http.ResponseWriter, r *http.Request) {
 
 		w.Header().Set("Content-Type", "text/html")
 		tmpl.Execute(w, products)
-	case "POST":
-		w.Header().Set("Content-Type", "text/plain")
-		w.Write([]byte("POST - Products\n"))
 	default:
 		w.WriteHeader(http.StatusMethodNotAllowed)
 	}

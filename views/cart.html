@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart</title>
+    <script src="https://unpkg.com/htmx.org@1.5.0"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Your Cart</h1>
+        <div id="cart-items" class="row mt-4" hx-get="/get-cart-items" hx-trigger="load" hx-target="#cart-items">
+            <!-- Cart items will be dynamically loaded here -->
+        </div>
+
+        <!-- Optional: Checkout button -->
+        <div class="mt-4">
+            <a href="/checkout" class="btn btn-success">Proceed to Checkout</a>
+        </div>
+    </div>
+</body>
+</html>
+
