@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"fmt"
 	"html/template"
 	"net/http"
 
@@ -14,6 +15,11 @@ func (s *Server) UsersPage(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *Server) GetUsersHandler(w http.ResponseWriter, r *http.Request) {
+    // Retrieve user information from the session
+    userID := s.SessionManager.GetInt(r.Context(), "user_id")
+
+    fmt.Println(userID)
+
 	s.mutex.Lock()
 
 	users, _ := models.GetUsers()

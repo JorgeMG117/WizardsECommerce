@@ -24,7 +24,6 @@ func (s *Server) GetCart(w http.ResponseWriter, r *http.Request) {
 		// Render the items in the cart, not the full product list
 		tmpl := template.Must(template.New("cart-items").Parse(`
 			<div class="container">
-				<h1 class="mt-5">Your Cart</h1>
 				{{if .}}
 					<div class="row mt-4">
 					{{range .}}
@@ -35,7 +34,7 @@ func (s *Server) GetCart(w http.ResponseWriter, r *http.Request) {
 									<h5 class="card-title">{{.Name}}</h5>
 									<p class="card-text">{{.Description}}</p>
 									<p class="card-text">$ {{.Price}}</p>
-									<a href="#" class="btn btn-danger">Remove from Cart</a>
+									<a href="#" class="btn btn-danger" hx-post="/delete-from-cart" hx-target="closest .col-md-4" hx-swap="outerHTML swap:remove" hx-headers='{"Content-Type": "application/json"}' hx-vals='{"Id": {{.ID}}}'>Remove from Cart</a>
 								</div>
 							</div>
 						</div>
@@ -76,6 +75,32 @@ func (s *Server) AddToCart(w http.ResponseWriter, r *http.Request) {
         // if I receive everything from the message somebody could send wrong price
 
         //fmt.Println("Content-Type Header:", r.Header.Get("Content-Type"))
+
+        w.WriteHeader(http.StatusOK)
+	default:
+		w.WriteHeader(http.StatusMethodNotAllowed)
+	}
+}
+
+func (s *Server) DeleteFromCart(w http.ResponseWriter, r *http.Request) {
+	fmt.Println(r.Method)
+	switch r.Method {
+	case "POST":
+        //var product models.Product
+        r.ParseForm()
+        productId := r.Form.Get("Id")
+
+        // Get product by Id
+        productIdInt, err := strconv.Atoi(productId)
+        utils.CheckError(err)
+
+        // ERROR
+        for i := range cart {
+            if cart[i].ID == productIdInt {
+                cart[i] = cart[len(cart)-1]
+                cart = cart[:len(cart)-1]
+            }
+        }
 
         w.WriteHeader(http.StatusOK)
 	default:

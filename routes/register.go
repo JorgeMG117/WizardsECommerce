@@ -1,18 +1,16 @@
 package routes
 
 import (
-	"fmt"
 	"html/template"
 	"net/http"
 	"path/filepath"
-    "strconv"
 
 	"github.com/JorgeMG117/WizardsECommerce/models"
 )
 
-func (s *Server) LoginHandler(w http.ResponseWriter, r *http.Request) {
+func (s *Server) RegisterHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
-		s.serveLoginForm(w, r)
+		s.getRegister(w, r)
 		return
 	}
 
@@ -33,17 +31,10 @@ func (s *Server) LoginHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-    fmt.Println("User login: ", user.ID)
-    userIdString := strconv.FormatUint(uint64(user.ID), 10)
-
-
-    s.SessionManager.Put(r.Context(), "user_id", userIdString)
-
-    http.Redirect(w, r, "/", http.StatusSeeOther)
 }
 
-func (s *Server) serveLoginForm(w http.ResponseWriter, r *http.Request) {
-	tmplPath := filepath.Join("views", "login.html")
+func (s *Server) getRegister(w http.ResponseWriter, r *http.Request) {
+	tmplPath := filepath.Join("views", "register.html")
 	tmpl, err := template.ParseFiles(tmplPath)
 	if err != nil {
 		http.Error(w, "Failed to load login form", http.StatusInternalServerError)

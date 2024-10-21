@@ -4,12 +4,14 @@ import (
 	"html/template"
 	"net/http"
 	"sync"
+    "github.com/alexedwards/scs/v2"
 
 	"github.com/JorgeMG117/WizardsECommerce/middleware"
 )
 
 type Server struct {
 	//Db          *sql.DB
+    SessionManager *scs.SessionManager
 	mutex sync.Mutex
 }
 
@@ -27,7 +29,7 @@ func cartPage(w http.ResponseWriter, r *http.Request) {
 func (s *Server) Router() http.Handler {
 	//th := timeHandler{format: "a"}
 	mux := http.NewServeMux()
-	mux.HandleFunc("/", landingPage)
+	mux.HandleFunc("/", middleware.AuthenticationMiddleware(s.SessionManager, landingPage))
 	mux.HandleFunc("/hello", s.Hello)
 	mux.HandleFunc("/products", s.Products)
 
@@ -35,11 +37,12 @@ func (s *Server) Router() http.Handler {
 	mux.HandleFunc("/cart", cartPage)
 	mux.HandleFunc("/get-cart-items", s.GetCart)
 	mux.HandleFunc("/add-to-cart", s.AddToCart)
+	mux.HandleFunc("/delete-from-cart", s.DeleteFromCart)
 
-
-	mux.HandleFunc("/users", middleware.AuthenticationMiddleware(s.UsersPage))
+	mux.HandleFunc("/users", middleware.AuthenticationMiddleware(s.SessionManager, s.UsersPage))
 	mux.HandleFunc("/getusers", s.GetUsersHandler)
 	mux.HandleFunc("/login", s.LoginHandler)
+	mux.HandleFunc("/register", s.RegisterHandler)
 	//mux.HandleFunc("/logout", logoutHandler)
-	return mux
+	return s.SessionManager.LoadAndSave(mux)
 }

@@ -1,8 +1,10 @@
 package routes
 
-// func logoutHandler(w http.ResponseWriter, r *http.Request) {
-// 	session, _ := store.Get(r, "session-name")
-// 	session.Values["authenticated"] = false
-// 	session.Save(r, w)
-// 	http.Redirect(w, r, "/", http.StatusFound)
-// }
+import (
+    "net/http"
+)
+
+func (s *Server) logoutHandler(w http.ResponseWriter, r *http.Request) {
+    s.SessionManager.Remove(r.Context(), "user_id")
+    http.Redirect(w, r, "/login", http.StatusSeeOther)
+}

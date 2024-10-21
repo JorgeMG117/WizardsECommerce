@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"time"
+    "github.com/alexedwards/scs/v2"
 
 	"github.com/JorgeMG117/WizardsECommerce/routes"
 )
@@ -21,10 +22,22 @@ func ExecServer() error {
 
 	s := routes.Server{
 		// Db: configs.ConnectDB(),
+        SessionManager: scs.New(),
 	}
+
+    s.SessionManager.Lifetime = 24 * time.Hour                     // Session lifetime of 24 hours
+    s.SessionManager.Cookie.Name = "session_id"                     // Name of the cookie
+    s.SessionManager.Cookie.HttpOnly = true                         // Prevent JavaScript access to the cookie
+    s.SessionManager.Cookie.Secure = true                           // Ensure the cookie is only sent over HTTPS
+    s.SessionManager.Cookie.SameSite = http.SameSiteLaxMode         // Prevent CSRF, but allow navigation from external sites
+    s.SessionManager.Cookie.Persist = true                          // Keep the cookie even after the browser is closed
+
+
+
+
 	// defer s.Db.Close()
 
-	// if intializeDB {
+	// if initializeDB {
 	// 	go func() {
 	// 		data.InitializeDatabase(s.Db)
 	// 		for {
@@ -56,6 +69,8 @@ func ExecServer() error {
 		MaxHeaderBytes: 1 << 20,
 		TLSConfig:      tlsConfig,
 	}
+
+    fmt.Println("### Server is starting... Listening on https://localhost:8080 ###")
 
 	defer serv.Close()
 	log.Fatal(serv.ListenAndServeTLS("", ""))
