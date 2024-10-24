@@ -19,6 +19,9 @@ func ExecServer() error {
 	// 		log.Fatalf("Error loading .env file for server: %s %s %s afks", err, os.Getenv("CI"), os.Getenv("DBUSER"))
 	// 	}
 	// }
+    if err := routes.LoadTemplates(); err != nil {
+        log.Fatalf("Error loading templates: %v", err)
+    }
 
 	s := routes.Server{
 		// Db: configs.ConnectDB(),

@@ -1,0 +1,26 @@
+{{define "base"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Common head elements -->
+    <meta charset="UTF-8">
+    <title>{{block "title" .}}Default Title{{end}}</title>
+    <link rel="icon" type="image/x-icon" href="/static/img/icon1.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    {{template "header" .}}
+
+    <!-- Main Content -->
+    {{block "content" .}}{{end}}
+
+    <!-- Footer -->
+    {{template "footer" .}}
+
+    <!-- Scripts -->
+    <script src="/static/js/script.js"></script>
+</body>
+</html>
+{{end}}
