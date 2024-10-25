@@ -1,29 +1,162 @@
 [
     {
         "id": 1,
-        "name": "NBA Jersey",
-        "description": "Official NBA Jersey",
-        "price": 59.99,
-        "stock": 10,
-        "category": "Apparel",
-        "image_url": "https://images.footballfanatics.com/washington-wizards/washington-wizards-nike-city-edition-swingman-jersey-23-black-jordan-poole-unisex_ss5_p-200824317+u-ycetsmxqcsiu9b6xgusj+v-ibk2kdcge0fjndjgfmh0.jpg?_hv=2&w=340"
+        "name": "Cartoon Astronaut T-Shirt",
+        "description": "High-quality cotton t-shirt with a cartoon astronaut print.",
+        "price": 2499,
+        "stock": 20,
+        "category": "T-Shirts",
+        "image_url": "/static/img/products/f1.jpg",
+        "brand": "adidas"
     },
     {
         "id": 2,
-        "name": "Basketball",
-        "description": "Official NBA Basketball",
-        "price": 29.99,
+        "name": "Cartoon Astronaut T-Shirt",
+        "description": "High-quality cotton t-shirt with a cartoon astronaut print.",
+        "price": 2499,
         "stock": 15,
-        "category": "Equipment",
-        "image_url": "https://images.footballfanatics.com/washington-wizards/washington-wizards-wilson-nba-city-edition-2023-basketball-size-7_ss5_p-13389957+u-hkhhtxkmcyicryihvyfx+v-wrox0h1m9xwlfosywzmu.jpg?_hv=2&w=340"
+        "category": "T-Shirts",
+        "image_url": "/static/img/products/f2.jpg",
+        "brand": "adidas"
     },
     {
         "id": 3,
-        "name": "Beanie",
-        "description": "Official NBA Beanie",
-        "price": 19.99,
+        "name": "Cartoon Astronaut T-Shirt",
+        "description": "High-quality cotton t-shirt with a cartoon astronaut print.",
+        "price": 2499,
+        "stock": 10,
+        "category": "T-Shirts",
+        "image_url": "/static/img/products/f3.jpg",
+        "brand": "adidas"
+    },
+    {
+        "id": 4,
+        "name": "Cartoon Astronaut T-Shirt",
+        "description": "High-quality cotton t-shirt with a cartoon astronaut print.",
+        "price": 2499,
+        "stock": 8,
+        "category": "T-Shirts",
+        "image_url": "/static/img/products/f4.jpg",
+        "brand": "adidas"
+    },
+    {
+        "id": 5,
+        "name": "Cartoon Astronaut T-Shirt",
+        "description": "High-quality cotton t-shirt with a cartoon astronaut print.",
+        "price": 2499,
+        "stock": 12,
+        "category": "T-Shirts",
+        "image_url": "/static/img/products/f5.jpg",
+        "brand": "adidas"
+    },
+    {
+        "id": 6,
+        "name": "Cartoon Astronaut T-Shirt",
+        "description": "High-quality cotton t-shirt with a cartoon astronaut print.",
+        "price": 2499,
+        "stock": 20,
+        "category": "T-Shirts",
+        "image_url": "/static/img/products/f6.jpg",
+        "brand": "adidas"
+    },
+    {
+        "id": 7,
+        "name": "Cartoon Astronaut T-Shirt",
+        "description": "High-quality cotton t-shirt with a cartoon astronaut print.",
+        "price": 2499,
+        "stock": 10,
+        "category": "T-Shirts",
+        "image_url": "/static/img/products/f7.jpg",
+        "brand": "adidas"
+    },
+    {
+        "id": 8,
+        "name": "Cartoon Astronaut T-Shirt",
+        "description": "High-quality cotton t-shirt with a cartoon astronaut print.",
+        "price": 2499,
+        "stock": 18,
+        "category": "T-Shirts",
+        "image_url": "/static/img/products/f8.jpg",
+        "brand": "adidas"
+    },
+    {
+        "id": 9,
+        "name": "Cartoon Astronaut T-Shirt",
+        "description": "New arrival high-quality cotton t-shirt with a cartoon astronaut print.",
+        "price": 2999,
+        "stock": 25,
+        "category": "New Arrivals",
+        "image_url": "/static/img/products/n1.jpg",
+        "brand": "adidas"
+    },
+    {
+        "id": 10,
+        "name": "Cartoon Astronaut T-Shirt",
+        "description": "New arrival high-quality cotton t-shirt with a cartoon astronaut print.",
+        "price": 2999,
+        "stock": 30,
+        "category": "New Arrivals",
+        "image_url": "/static/img/products/n2.jpg",
+        "brand": "adidas"
+    },
+    {
+        "id": 11,
+        "name": "Cartoon Astronaut T-Shirt",
+        "description": "New arrival high-quality cotton t-shirt with a cartoon astronaut print.",
+        "price": 2999,
+        "stock": 22,
+        "category": "New Arrivals",
+        "image_url": "/static/img/products/n3.jpg",
+        "brand": "adidas"
+    },
+    {
+        "id": 12,
+        "name": "Cartoon Astronaut T-Shirt",
+        "description": "New arrival high-quality cotton t-shirt with a cartoon astronaut print.",
+        "price": 2999,
+        "stock": 28,
+        "category": "New Arrivals",
+        "image_url": "/static/img/products/n4.jpg",
+        "brand": "adidas"
+    },
+    {
+        "id": 13,
+        "name": "Cartoon Astronaut T-Shirt",
+        "description": "New arrival high-quality cotton t-shirt with a cartoon astronaut print.",
+        "price": 2999,
+        "stock": 16,
+        "category": "New Arrivals",
+        "image_url": "/static/img/products/n5.jpg",
+        "brand": "adidas"
+    },
+    {
+        "id": 14,
+        "name": "Cartoon Astronaut T-Shirt",
+        "description": "New arrival high-quality cotton t-shirt with a cartoon astronaut print.",
+        "price": 2999,
         "stock": 15,
-        "category": "Apparel",
-        "image_url": "https://images.footballfanatics.com/washington-wizards/washington-wizards-new-era-city-edition-2022-knit-mens_ss4_p-13326084+u-1ihy55ceo9jdlvuq907k+v-134bdc51462e4564a319b9ad7732173a.jpg?_hv=2&w=340"
+        "category": "New Arrivals",
+        "image_url": "/static/img/products/n6.jpg",
+        "brand": "adidas"
+    },
+    {
+        "id": 15,
+        "name": "Cartoon Astronaut T-Shirt",
+        "description": "New arrival high-quality cotton t-shirt with a cartoon astronaut print.",
+        "price": 2999,
+        "stock": 20,
+        "category": "New Arrivals",
+        "image_url": "/static/img/products/n7.jpg",
+        "brand": "adidas"
+    },
+    {
+        "id": 16,
+        "name": "Cartoon Astronaut T-Shirt",
+        "description": "New arrival high-quality cotton t-shirt with a cartoon astronaut print.",
+        "price": 2999,
+        "stock": 18,
+        "category": "New Arrivals",
+        "image_url": "/static/img/products/n8.jpg",
+        "brand": "adidas"
     }
 ]

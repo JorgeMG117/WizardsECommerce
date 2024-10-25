@@ -15,22 +15,28 @@ func (s *Server) Products(w http.ResponseWriter, r *http.Request) {
 		s.mutex.Lock()
 
 		products, _ := models.GetProducts()
+        fmt.Println(products)
 
 		s.mutex.Unlock()
 
 		tmpl := template.Must(template.New("products").Parse(`
 			{{range .}}
-				<div class="col-md-4 mb-4">
-					<div class="card">
-						<img src="{{.ImageURL}}" class="card-img-top" alt="{{.Name}}">
-						<div class="card-body">
-							<h5 class="card-title">{{.Name}}</h5>
-							<p class="card-text">{{.Description}}</p>
-							<p class="card-text">$ {{.Price}}</p>
-							<a class="btn btn-primary" hx-post="/add-to-cart" hx-swap="none" hx-headers='{"Content-Type": "application/json"}' hx-vals='{"Id": {{.ID}}}'>Add to Cart</a>
-						</div>
-					</div>
-				</div>
+                <div class="pro">
+                    <img class="shirt" src="{{.ImageURL}}" alt="{{.Name}}">
+                    <div class="des">
+                        <span>{{.Brand}}</span>
+                        <h5>{{.Name}}</h5>
+                        <div class="star">
+                            <i class='bx bxs-star' ></i>
+                            <i class='bx bxs-star' ></i>
+                            <i class='bx bxs-star' ></i>
+                            <i class='bx bxs-star' ></i>
+                            <i class='bx bxs-star' ></i>
+                        </div>
+                        <h4>₹{{.Price}}</h4>
+                    </div>
+                    <a hx-post="/add-to-cart" hx-swap="none" hx-headers='{"Content-Type": "application/json"}' hx-vals='{"Id": {{.ID}}}'><i class='bx bx-cart cart'></i></a>
+                </div>
 			{{end}}
 		`))
 
@@ -40,3 +46,4 @@ func (s *Server) Products(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 	}
 }
+

@@ -23,28 +23,37 @@ func (s *Server) GetCart(w http.ResponseWriter, r *http.Request) {
 
 		// Render the items in the cart, not the full product list
 		tmpl := template.Must(template.New("cart-items").Parse(`
-			<div class="container">
+            <section id="cart" class="section-p1">
 				{{if .}}
-					<div class="row mt-4">
-					{{range .}}
-						<div class="col-md-4 mb-4">
-							<div class="card">
-								<img src="{{.ImageURL}}" class="card-img-top" alt="{{.Name}}">
-								<div class="card-body">
-									<h5 class="card-title">{{.Name}}</h5>
-									<p class="card-text">{{.Description}}</p>
-									<p class="card-text">$ {{.Price}}</p>
-									<a href="#" class="btn btn-danger" hx-post="/delete-from-cart" hx-target="closest .col-md-4" hx-swap="outerHTML swap:remove" hx-headers='{"Content-Type": "application/json"}' hx-vals='{"Id": {{.ID}}}'>Remove from Cart</a>
-								</div>
-							</div>
-						</div>
-					{{end}}
-					</div>
+                    <table width="100%">
+                        <thead>
+                            <tr>
+                                <td>Remove</td>
+                                <td>Image</td>
+                                <td>Product</td>
+                                <td>Price</td>
+                                <td>Quantity</td>
+                                <td>Subtotal</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{range .}}
+                                <tr>
+                                    <td><i class='bx bx-x-circle'></i></td>
+                                    <td><img src="{{.ImageURL}}" alt="{{.Name}}"></td>
+                                    <td>{{.Name}}</td>
+                                    <td>{{.Price}}€</td>
+                                    <td><input type="number" value="1"></td>
+                                    <td>{{.Price}}€</td>
+                                </tr>
+                            {{end}}
+                        </tbody>
 				{{else}}
 					<p>Your cart is empty.</p>
 				{{end}}
-			</div>
+            </section>
 		`))
+        //<a href="#" class="btn btn-danger" hx-post="/delete-from-cart" hx-target="closest .col-md-4" hx-swap="outerHTML swap:remove" hx-headers='{"Content-Type": "application/json"}' hx-vals='{"Id": {{.ID}}}'>Remove from Cart</a>
 
 		w.Header().Set("Content-Type", "text/html")
 		if err := tmpl.Execute(w, cart); err != nil {

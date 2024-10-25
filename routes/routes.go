@@ -32,8 +32,7 @@ func cartPage(w http.ResponseWriter, r *http.Request) {
 var TemplateCache = make(map[string]*template.Template)
 
 func LoadTemplates() error {
-    //templates, err := filepath.Glob("views/templates/*.html")
-    templates, err := filepath.Glob("views/prueba.html")
+    templates, err := filepath.Glob("views/templates/*.html")
     if err != nil {
         return err
     }
@@ -65,8 +64,9 @@ func LoadTemplates() error {
     return nil
 }
 
-func (s *Server) Prueba(w http.ResponseWriter, r *http.Request) {
-    tmpl, ok := TemplateCache["prueba.html"]
+
+func (s *Server) RenderTemplate(w http.ResponseWriter, templateName string) {
+    tmpl, ok := TemplateCache[templateName]
     if !ok {
         http.Error(w, "Could not load template", http.StatusInternalServerError)
         return
@@ -88,18 +88,27 @@ func (s *Server) Router() http.Handler {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", middleware.AuthenticationMiddleware(s.SessionManager, landingPage))
 
-	mux.HandleFunc("/index", s.Index)
-	mux.HandleFunc("/shop", s.Shop)
-	mux.HandleFunc("/about", s.About)
-	mux.HandleFunc("/prueba", s.Prueba)
-	mux.HandleFunc("/contact", s.Contact)
-	// mux.HandleFunc("/cart", s.Cart)
+	mux.HandleFunc("/index", func(w http.ResponseWriter, r *http.Request) {
+        s.RenderTemplate(w, "index.html")
+    })
+	mux.HandleFunc("/shop", func(w http.ResponseWriter, r *http.Request) {
+        s.RenderTemplate(w, "shop.html")
+    })
+	mux.HandleFunc("/cart", func(w http.ResponseWriter, r *http.Request) {
+        s.RenderTemplate(w, "cart.html")
+    })
+	mux.HandleFunc("/contact", func(w http.ResponseWriter, r *http.Request) {
+        s.RenderTemplate(w, "contact.html")
+    })
+	mux.HandleFunc("/about", func(w http.ResponseWriter, r *http.Request) {
+        s.RenderTemplate(w, "about.html")
+    })
 
-	mux.HandleFunc("/hello", s.Hello)
+	// mux.HandleFunc("/hello", s.Hello)
 	mux.HandleFunc("/products", s.Products)
 
     // Cart
-	mux.HandleFunc("/cart", cartPage)
+	// mux.HandleFunc("/cart", cartPage)
 	mux.HandleFunc("/get-cart-items", s.GetCart)
 	mux.HandleFunc("/add-to-cart", s.AddToCart)
 	mux.HandleFunc("/delete-from-cart", s.DeleteFromCart)
