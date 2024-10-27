@@ -1,4 +1,4 @@
-<!-- index.html -->
+<!-- shop.html -->
 {{define "title"}}Home - Your ECommerce Site{{end}}
 {{define "content"}}
         <section id="page-header">
@@ -6,29 +6,17 @@
             <p>save more with coupons & up to 70% off!</p>
         </section> 
 
+
         <section id="product1" class="section-p1">
             <div class="pro-container">
-                <div class="pro" onclick="window.location.href='product.html';">
-                    <img class="shirt" src="img/products/f1.jpg" alt="">
-                    <div class="des">
-                        <span>adidas</span>
-                        <h5>Cartoon Astronaut T-Shirts</h5>
-                        <div class="star">
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                        </div>
-                        <h4>₹2499</h4>
-                    </div>
-                    <a href="#"><i class='bx bx-cart cart' ></i></a>
-                </div>
+                {{range .}}
                 <div class="pro">
-                    <img class="shirt" src="img/products/f2.jpg" alt="">
+                    <a href="/product/{{.ID}}">
+                        <img class="shirt" src="{{.ImageURL}}" alt="">
+                    </a>
                     <div class="des">
-                        <span>adidas</span>
-                        <h5>Cartoon Astronaut T-Shirts</h5>
+                        <span>{{.Brand}}</span>
+                        <h5><a href="/product/{{.ID}}">{{.Name}}</a></h5>
                         <div class="star">
                             <i class='bx bxs-star' ></i>
                             <i class='bx bxs-star' ></i>
@@ -36,237 +24,14 @@
                             <i class='bx bxs-star' ></i>
                             <i class='bx bxs-star' ></i>
                         </div>
-                        <h4>₹2499</h4>
+                        <h4>{{.Price}}€</h4>
                     </div>
-                    <a href="#"><i class='bx bx-cart cart' ></i></a>
+                    <a href="/add-to-cart?product_id={{.ID}}"><i class='bx bx-cart cart'></i></a>
                 </div>
-                <div class="pro">
-                    <img class="shirt" src="img/products/f3.jpg" alt="">
-                    <div class="des">
-                        <span>adidas</span>
-                        <h5>Cartoon Astronaut T-Shirts</h5>
-                        <div class="star">
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                        </div>
-                        <h4>₹2499</h4>
-                    </div>
-                    <a href="#"><i class='bx bx-cart cart' ></i></a>
-                </div>
-                <div class="pro">
-                    <img class="shirt" src="img/products/f4.jpg" alt="">
-                    <div class="des">
-                        <span>adidas</span>
-                        <h5>Cartoon Astronaut T-Shirts</h5>
-                        <div class="star">
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                        </div>
-                        <h4>₹2499</h4>
-                    </div>
-                    <a href="#"><i class='bx bx-cart cart' ></i></a>
-                </div>
-                <div class="pro">
-                    <img class="shirt" src="img/products/f5.jpg" alt="">
-                    <div class="des">
-                        <span>adidas</span>
-                        <h5>Cartoon Astronaut T-Shirts</h5>
-                        <div class="star">
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                        </div>
-                        <h4>₹2499</h4>
-                    </div>
-                    <a href="#"><i class='bx bx-cart cart' ></i></a>
-                </div>
-                <div class="pro">
-                    <img class="shirt" src="img/products/f6.jpg" alt="">
-                    <div class="des">
-                        <span>adidas</span>
-                        <h5>Cartoon Astronaut T-Shirts</h5>
-                        <div class="star">
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                        </div>
-                        <h4>₹2499</h4>
-                    </div>
-                    <a href="#"><i class='bx bx-cart cart' ></i></a>
-                </div>
-                <div class="pro">
-                    <img class="shirt" src="img/products/f7.jpg" alt="">
-                    <div class="des">
-                        <span>adidas</span>
-                        <h5>Cartoon Astronaut T-Shirts</h5>
-                        <div class="star">
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                        </div>
-                        <h4>₹2499</h4>
-                    </div>
-                    <a href="#"><i class='bx bx-cart cart' ></i></a>
-                </div>
-                <div class="pro">
-                    <img class="shirt" src="img/products/f8.jpg" alt="">
-                    <div class="des">
-                        <span>adidas</span>
-                        <h5>Cartoon Astronaut T-Shirts</h5>
-                        <div class="star">
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                        </div>
-                        <h4>₹2499</h4>
-                    </div>
-                    <a href="#"><i class='bx bx-cart cart' ></i></a>
-                </div>
-            
-                <div class="pro">
-                    <img class="shirt" src="img/products/n1.jpg" alt="">
-                    <div class="des">
-                        <span>adidas</span>
-                        <h5>Cartoon Astronaut T-Shirts</h5>
-                        <div class="star">
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                        </div>
-                        <h4>₹2999</h4>
-                    </div>
-                    <a href="#"><i class='bx bx-cart cart' ></i></a>
-                </div>
-                <div class="pro">
-                    <img class="shirt" src="img/products/n2.jpg" alt="">
-                    <div class="des">
-                        <span>adidas</span>
-                        <h5>Cartoon Astronaut T-Shirts</h5>
-                        <div class="star">
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                        </div>
-                        <h4>₹2999</h4>
-                    </div>
-                    <a href="#"><i class='bx bx-cart cart' ></i></a>
-                </div>
-                <div class="pro">
-                    <img class="shirt" src="img/products/n3.jpg" alt="">
-                    <div class="des">
-                        <span>adidas</span>
-                        <h5>Cartoon Astronaut T-Shirts</h5>
-                        <div class="star">
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                        </div>
-                        <h4>₹2999</h4>
-                    </div>
-                    <a href="#"><i class='bx bx-cart cart' ></i></a>
-                </div>
-                <div class="pro">
-                    <img class="shirt" src="img/products/n4.jpg" alt="">
-                    <div class="des">
-                        <span>adidas</span>
-                        <h5>Cartoon Astronaut T-Shirts</h5>
-                        <div class="star">
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                        </div>
-                        <h4>₹2999</h4>
-                    </div>
-                    <a href="#"><i class='bx bx-cart cart' ></i></a>
-                </div>
-                <div class="pro">
-                    <img class="shirt" src="img/products/n5.jpg" alt="">
-                    <div class="des">
-                        <span>adidas</span>
-                        <h5>Cartoon Astronaut T-Shirts</h5>
-                        <div class="star">
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                        </div>
-                        <h4>₹2999</h4>
-                    </div>
-                    <a href="#"><i class='bx bx-cart cart' ></i></a>
-                </div>
-                <div class="pro">
-                    <img class="shirt" src="img/products/n6.jpg" alt="">
-                    <div class="des">
-                        <span>adidas</span>
-                        <h5>Cartoon Astronaut T-Shirts</h5>
-                        <div class="star">
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                        </div>
-                        <h4>₹2999</h4>
-                    </div>
-                    <a href="#"><i class='bx bx-cart cart' ></i></a>
-                </div>
-                <div class="pro">
-                    <img class="shirt" src="img/products/n7.jpg" alt="">
-                    <div class="des">
-                        <span>adidas</span>
-                        <h5>Cartoon Astronaut T-Shirts</h5>
-                        <div class="star">
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                        </div>
-                        <h4>₹2999</h4>
-                    </div>
-                    <a href="#"><i class='bx bx-cart cart' ></i></a>
-                </div>
-                <div class="pro">
-                    <img class="shirt" src="img/products/n8.jpg" alt="">
-                    <div class="des">
-                        <span>adidas</span>
-                        <h5>Cartoon Astronaut T-Shirts</h5>
-                        <div class="star">
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                            <i class='bx bxs-star' ></i>
-                        </div>
-                        <h4>₹2999</h4>
-                    </div>
-                    <a href="#"><i class='bx bx-cart cart' ></i></a>
-                </div>
+                {{end}}
             </div>
         </section>
+
 
         <section id="pagination" class="section-p1">
             <a href="#">1</a>

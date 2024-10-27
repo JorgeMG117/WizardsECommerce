@@ -10,6 +10,7 @@ import (
 	"github.com/alexedwards/scs/v2"
 
 	"github.com/JorgeMG117/WizardsECommerce/middleware"
+	"github.com/JorgeMG117/WizardsECommerce/models"
 )
 
 type Server struct {
@@ -18,16 +19,6 @@ type Server struct {
 	mutex sync.Mutex
 }
 
-func landingPage(w http.ResponseWriter, r *http.Request) {
-	tmpl := template.Must(template.ParseFiles("views/products.html"))
-	tmpl.Execute(w, nil)
-}
-
-func cartPage(w http.ResponseWriter, r *http.Request) {
-    tmpl := template.Must(template.ParseFiles("views/cart.html"))
-	tmpl.Execute(w, nil)
-
-}
 
 var TemplateCache = make(map[string]*template.Template)
 
@@ -44,7 +35,6 @@ func LoadTemplates() error {
 
     baseTemplate := "views/base.html"
 
-    fmt.Println(templates)
     for _, tmplFile := range templates {
         // Combine base, includes, and the current template file
         files := append([]string{baseTemplate}, includes...)
@@ -65,13 +55,13 @@ func LoadTemplates() error {
 }
 
 
-func (s *Server) RenderTemplate(w http.ResponseWriter, templateName string) {
+func (s *Server) RenderTemplate(w http.ResponseWriter, templateName string, data interface{}) {
     tmpl, ok := TemplateCache[templateName]
     if !ok {
         http.Error(w, "Could not load template", http.StatusInternalServerError)
         return
     }
-    err := tmpl.ExecuteTemplate(w, "base", nil)
+    err := tmpl.ExecuteTemplate(w, "base", data)
     if err != nil {
         http.Error(w, "Error executing template: "+err.Error(), http.StatusInternalServerError)
         return
@@ -86,30 +76,32 @@ func ServeStatic() {
 func (s *Server) Router() http.Handler {
 	//th := timeHandler{format: "a"}
 	mux := http.NewServeMux()
-	mux.HandleFunc("/", middleware.AuthenticationMiddleware(s.SessionManager, landingPage))
+	//mux.HandleFunc("/", middleware.AuthenticationMiddleware(s.SessionManager, landingPage))
 
 	mux.HandleFunc("/index", func(w http.ResponseWriter, r *http.Request) {
-        s.RenderTemplate(w, "index.html")
+        s.RenderTemplate(w, "index.html", nil)
     })
 	mux.HandleFunc("/shop", func(w http.ResponseWriter, r *http.Request) {
-        s.RenderTemplate(w, "shop.html")
+		s.mutex.Lock()
+		products, _ := models.GetProducts()
+		s.mutex.Unlock()
+        s.RenderTemplate(w, "shop.html", products)
     })
-	mux.HandleFunc("/cart", func(w http.ResponseWriter, r *http.Request) {
-        s.RenderTemplate(w, "cart.html")
-    })
+	mux.HandleFunc("/cart", s.GetCart)
 	mux.HandleFunc("/contact", func(w http.ResponseWriter, r *http.Request) {
-        s.RenderTemplate(w, "contact.html")
+        s.RenderTemplate(w, "contact.html", nil)
     })
 	mux.HandleFunc("/about", func(w http.ResponseWriter, r *http.Request) {
-        s.RenderTemplate(w, "about.html")
+        s.RenderTemplate(w, "about.html", nil)
     })
+	mux.HandleFunc("/product/", s.Product)
 
 	// mux.HandleFunc("/hello", s.Hello)
 	mux.HandleFunc("/products", s.Products)
 
     // Cart
 	// mux.HandleFunc("/cart", cartPage)
-	mux.HandleFunc("/get-cart-items", s.GetCart)
+	// mux.HandleFunc("/get-cart-items", s.GetCart)
 	mux.HandleFunc("/add-to-cart", s.AddToCart)
 	mux.HandleFunc("/delete-from-cart", s.DeleteFromCart)
 

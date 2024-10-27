@@ -57,3 +57,13 @@ func GetProductById(id int) Product {
 
     return products[0] 
 }
+
+func GetFeaturedProducts() ([]Product, error) {
+	var products []Product
+	err := utils.ReadFile(productFile, &products)
+	if err != nil {
+		return nil, err
+	}
+	return products, nil
+}
+

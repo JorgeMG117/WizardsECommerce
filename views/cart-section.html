@@ -1,0 +1,70 @@
+{{define "cart-section"}}
+<div id="cart-section">
+    {{if .Items}}
+        <section id="cart" class="section-p1">
+            <table width="100%">
+                <thead>
+                    <tr>
+                        <td>Remove</td>
+                        <td>Image</td>
+                        <td>Product</td>
+                        <td>Price</td>
+                        <td>Quantity</td>
+                        <td>Subtotal</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{range .Items}}
+                        <tr>
+                            <td>
+                                <form hx-post="/delete-from-cart" hx-target="#cart-section" hx-swap="outerHTML">
+                                    <input type="hidden" name="Id" value="{{.Product.ID}}">
+                                    <button type="submit" class="delete-button">
+                                        <i class='bx bx-x-circle'></i>
+                                    </button>
+                                </form>
+                            </td>
+                            <td><img src="{{.Product.ImageURL}}" alt="{{.Product.Name}}"></td>
+                            <td>{{.Product.Name}}</td>
+                            <td>{{printf "%.2f" .Product.Price}}€</td>
+                            <td>{{.Quantity}}</td>
+                            <td>{{printf "%.2f" .Subtotal}}€</td>
+                        </tr>
+                    {{end}}
+                </tbody>
+            </table>
+        </section>
+        <section id="cart-add" class="section-p1">
+            <div id="coupon">
+                <h3>Apply Coupon</h3>
+                <div>
+                    <input type="text" placeholder="Enter Your Coupon">
+                    <button class="normal">Apply</button>
+                </div>
+            </div>
+
+            <div id="subtotal">
+                <h3>Cart Total</h3>
+                <table>
+                    <tr>
+                        <td>Cart Subtotal</td>
+                        <td>{{printf "%.2f" .Total}}€</td>
+                    </tr>
+                    <tr>
+                        <td>Shipping</td>
+                        <td>Free</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Total</strong></td>
+                        <td><strong>{{printf "%.2f" .Total}}€</strong></td>
+                    </tr>
+                </table>
+                <button class="normal">Proceed to checkout</button>
+            </div>
+        </section>
+    {{else}}
+        <p>Your cart is empty.</p>
+    {{end}}
+</div>
+
+{{end}}

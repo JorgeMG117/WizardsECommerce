@@ -15,7 +15,6 @@ func (s *Server) Products(w http.ResponseWriter, r *http.Request) {
 		s.mutex.Lock()
 
 		products, _ := models.GetProducts()
-        fmt.Println(products)
 
 		s.mutex.Unlock()
 
