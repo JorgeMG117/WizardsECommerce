@@ -26,7 +26,21 @@
                         </div>
                         <h4>{{.Price}}€</h4>
                     </div>
-                    <a href="/add-to-cart?product_id={{.ID}}"><i class='bx bx-cart cart'></i></a>
+                    <form 
+                        action="/add-to-cart" 
+                        method="POST" 
+                        hx-post="/add-to-cart" 
+                        hx-trigger="click" 
+                        hx-swap="none"
+                        style="display: inline;">
+                        
+                        <input type="hidden" name="Id" value="{{.ID}}">
+                        <input type="hidden" name="quantity" value="1">
+                        
+                        <button type="button" style="border: none; background: none; padding: 0;">
+                            <i class='bx bx-cart cart'></i>
+                        </button>
+                    </form>
                 </div>
                 {{end}}
             </div>

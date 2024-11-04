@@ -300,6 +300,14 @@ body {
   position: absolute;
   bottom: 20px;
   right: 10px;
+
+  cursor: pointer; /* Changes cursor to pointer on hover */
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+#product1 .pro .cart:hover {
+  transform: scale(1.2); /* Slightly scales up the button */
+  color: #007bff; /* Changes color on hover */
 }
 
 #banner {

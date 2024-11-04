@@ -165,7 +165,7 @@ func (s *Server) DeleteFromCart(w http.ResponseWriter, r *http.Request) {
         }
 
         // Render the updated cart section
-        tmpl := template.Must(template.New("cart-section").ParseFiles("views/cart-section.html"))
+        tmpl := template.Must(template.New("cart-section").ParseFiles("views/includes/cart-section.html"))
         w.Header().Set("Content-Type", "text/html")
         err = tmpl.Execute(w, data)
         if err != nil {

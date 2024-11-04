@@ -78,7 +78,7 @@ func (s *Server) Router() http.Handler {
 	mux := http.NewServeMux()
 	//mux.HandleFunc("/", middleware.AuthenticationMiddleware(s.SessionManager, landingPage))
 
-	mux.HandleFunc("/index", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
         s.RenderTemplate(w, "index.html", nil)
     })
 	mux.HandleFunc("/shop", func(w http.ResponseWriter, r *http.Request) {
