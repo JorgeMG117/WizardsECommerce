@@ -59,7 +59,13 @@
                         <td><strong>{{printf "%.2f" .Total}}€</strong></td>
                     </tr>
                 </table>
-                <button class="normal">Proceed to checkout</button>
+                <form action="/create-checkout-session" method="POST">
+                    {{range .Items}}
+                        <input type="hidden" name="productIds" value="{{.Product.ID}}">
+                        <input type="hidden" name="quantities" value="{{.Quantity}}">
+                    {{end}}
+                    <button class="normal" type="submit">Proceed to checkout</button>
+                </form>
             </div>
         </section>
     {{else}}

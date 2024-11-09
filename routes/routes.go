@@ -112,6 +112,11 @@ func (s *Server) Router() http.Handler {
 	//mux.HandleFunc("/logout", logoutHandler)
 
 
+    // Stripe
+	mux.HandleFunc("/create-checkout-session", s.CreateCheckoutSession)
+
+
+
     // Serve static files from the 'static' directory
     fileServer := http.FileServer(http.Dir("./static"))
     mux.Handle("/static/", http.StripPrefix("/static", fileServer))

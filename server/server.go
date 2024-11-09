@@ -2,11 +2,13 @@ package server
 
 import (
 	"crypto/tls"
+    "os"
 	"fmt"
 	"log"
 	"net/http"
 	"time"
     "github.com/alexedwards/scs/v2"
+    "github.com/stripe/stripe-go/v81"
 
 	"github.com/JorgeMG117/WizardsECommerce/routes"
 )
@@ -52,6 +54,8 @@ func ExecServer() error {
 
 	// fmt.Println("Waiting for database to update")
 	// time.Sleep(time.Second * 30)
+
+    stripe.Key = os.Getenv("STRIPE_KEY")
 
 	fmt.Println("### CREATING SERVER ###")
 

@@ -39,18 +39,9 @@ func (s *Server) Product(w http.ResponseWriter, r *http.Request) {
             FeaturedProducts: featuredProducts,
         }
 
+        s.RenderTemplate(w, "product.html", data)
 
-        tmpl, ok := TemplateCache["product.html"]
-        if !ok {
-            http.Error(w, "Could not load template", http.StatusInternalServerError)
-            return
-        }
 
-        err = tmpl.ExecuteTemplate(w, "base", data)
-        if err != nil {
-            http.Error(w, "Error executing template: "+err.Error(), http.StatusInternalServerError)
-            return
-        }
 	default:
 		w.WriteHeader(http.StatusMethodNotAllowed)
 	}
