@@ -1,0 +1,19 @@
+<!-- register.html -->
+{{define "title"}}Home - Your ECommerce Site{{end}}
+{{define "content"}}
+
+    <section id="register" class="section-p1">
+        <div id="form-details">
+            <form action="/register" method="POST">
+                <h2>Register</h2>
+                <input type="text" id="username" name="username" placeholder="Username" required>
+                <input type="email" id="email" name="email" placeholder="Email" required>
+                <input type="password" id="password" name="password" placeholder="Password" required>
+                <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
+                <button type="submit" class="normal">Register</button>
+                <p>Already have an account? <a href="/login">Login</a></p>
+            </form>
+        </div>
+    </section>
+
+{{end}}

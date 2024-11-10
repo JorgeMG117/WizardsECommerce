@@ -1,16 +1,14 @@
 package routes
 
 import (
-	"html/template"
 	"net/http"
-	"path/filepath"
 
 	"github.com/JorgeMG117/WizardsECommerce/models"
 )
 
 func (s *Server) RegisterHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
-		s.getRegister(w, r)
+        s.RenderTemplate(w, "register.html", nil)
 		return
 	}
 
@@ -31,17 +29,4 @@ func (s *Server) RegisterHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-}
-
-func (s *Server) getRegister(w http.ResponseWriter, r *http.Request) {
-	tmplPath := filepath.Join("views", "register.html")
-	tmpl, err := template.ParseFiles(tmplPath)
-	if err != nil {
-		http.Error(w, "Failed to load login form", http.StatusInternalServerError)
-		return
-	}
-
-	if err := tmpl.Execute(w, nil); err != nil {
-		http.Error(w, "Failed to render login form", http.StatusInternalServerError)
-	}
 }

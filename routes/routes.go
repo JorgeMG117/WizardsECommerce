@@ -81,10 +81,6 @@ func (s *Server) RenderTemplate(w http.ResponseWriter, templateName string, data
     }
 }
 
-func ServeStatic() {
-}
-
-//TODO: Maybe add func RenderStatic
 
 func (s *Server) Router() http.Handler {
 	//th := timeHandler{format: "a"}
@@ -120,13 +116,14 @@ func (s *Server) Router() http.Handler {
 
 	mux.HandleFunc("/users", middleware.AuthenticationMiddleware(s.SessionManager, s.UsersPage))
 	mux.HandleFunc("/getusers", s.GetUsersHandler)
+
 	mux.HandleFunc("/login", s.LoginHandler)
 	mux.HandleFunc("/register", s.RegisterHandler)
 	//mux.HandleFunc("/logout", logoutHandler)
 
 
     // Stripe
-	mux.HandleFunc("/create-checkout-session", s.CreateCheckoutSession)
+	mux.HandleFunc("/create-checkout-session", middleware.AuthenticationMiddleware(s.SessionManager, s.CreateCheckoutSession))
 
 
 

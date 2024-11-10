@@ -2,9 +2,7 @@ package routes
 
 import (
 	"fmt"
-	"html/template"
 	"net/http"
-	"path/filepath"
     "strconv"
 
 	"github.com/JorgeMG117/WizardsECommerce/models"
@@ -12,7 +10,7 @@ import (
 
 func (s *Server) LoginHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
-		s.serveLoginForm(w, r)
+        s.RenderTemplate(w, "login.html", nil)
 		return
 	}
 
@@ -39,18 +37,7 @@ func (s *Server) LoginHandler(w http.ResponseWriter, r *http.Request) {
 
     s.SessionManager.Put(r.Context(), "user_id", userIdString)
 
+
     http.Redirect(w, r, "/", http.StatusSeeOther)
 }
 
-func (s *Server) serveLoginForm(w http.ResponseWriter, r *http.Request) {
-	tmplPath := filepath.Join("views", "login.html")
-	tmpl, err := template.ParseFiles(tmplPath)
-	if err != nil {
-		http.Error(w, "Failed to load login form", http.StatusInternalServerError)
-		return
-	}
-
-	if err := tmpl.Execute(w, nil); err != nil {
-		http.Error(w, "Failed to render login form", http.StatusInternalServerError)
-	}
-}
