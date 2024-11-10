@@ -105,6 +105,8 @@ func (s *Server) AddToCart(w http.ResponseWriter, r *http.Request) {
         // Save cart back to session
         //s.SessionManager.Put(r.Context(), "cart", cart)
     
+        cartItemCount := 3
+        fmt.Fprintf(w, `<span id="cart-count" class="cart-badge">%d</span>`, cartItemCount)
         w.WriteHeader(http.StatusOK)
     default:
         w.WriteHeader(http.StatusMethodNotAllowed)

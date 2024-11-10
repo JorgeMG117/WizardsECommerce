@@ -55,13 +55,26 @@ func LoadTemplates() error {
 }
 
 
+type TemplateData struct {
+    CartItemCount int
+    Data          interface{}
+}
+
 func (s *Server) RenderTemplate(w http.ResponseWriter, templateName string, data interface{}) {
+
     tmpl, ok := TemplateCache[templateName]
     if !ok {
         http.Error(w, "Could not load template", http.StatusInternalServerError)
         return
     }
-    err := tmpl.ExecuteTemplate(w, "base", data)
+
+    cartItemCount := 1
+    td := TemplateData{
+        CartItemCount: cartItemCount,
+        Data:          data,
+    }
+
+    err := tmpl.ExecuteTemplate(w, "base", td)
     if err != nil {
         http.Error(w, "Error executing template: "+err.Error(), http.StatusInternalServerError)
         return

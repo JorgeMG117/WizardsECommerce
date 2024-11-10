@@ -137,7 +137,7 @@ body {
   display: none;
 }
 
-.cart-count {
+#cart-count {
     background-color: red;
     color: white;
     border-radius: 50%;

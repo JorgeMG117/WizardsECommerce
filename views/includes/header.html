@@ -7,7 +7,12 @@
             <li><a href="/shop">Shop</a></li>
             <li><a href="/about">About</a></li>
             <li><a href="/contact">Contact</a></li>
-            <li id="lg-bag"><a href="/cart"><i class='bx bx-shopping-bag'></i></a></li>
+            <li id="lg-bag">
+                <a href="/cart">
+                    <i class='bx bx-shopping-bag'></i>
+                    <span id="cart-count">{{.CartItemCount}}</span>
+                </a>
+            </li>
             <a href="#" id="close"><i class='bx bx-x'></i></a>
         </ul>
     </div>
