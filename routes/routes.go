@@ -69,7 +69,19 @@ func (s *Server) RenderTemplate(w http.ResponseWriter, templateName string, data
         return
     }
 
-    cartItemCount := 1
+    // Get total items in cart. TODO Check if there is a more efficient way
+    /*
+    cartInterface := s.SessionManager.Get(r.Context(), "cart")
+    var cart models.Cart
+    if cartInterface != nil {
+        cart, _ = cartInterface.(models.Cart)
+    } else {
+        cart = make(models.Cart)
+    }
+    cartItemCount := cart.GetTotalItems()
+    */
+    cartItemCount := 0
+
     td := TemplateData{
         CartItemCount: cartItemCount,
         Data:          data,

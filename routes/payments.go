@@ -5,54 +5,46 @@ import (
 	"log"
 	"net/http"
 	"os"
-    
-	//"github.com/JorgeMG117/WizardsECommerce/models"
 
+	"github.com/JorgeMG117/WizardsECommerce/models"
+	"github.com/JorgeMG117/WizardsECommerce/utils"
 	"github.com/stripe/stripe-go/v81"
 	"github.com/stripe/stripe-go/v81/checkout/session"
 )
 
 
 func (s *Server) CreateCheckoutSession(w http.ResponseWriter, r *http.Request) {
-    fmt.Println("En payments")
-    type product struct {
-        priceInCents int64
-        name string
-    }
-
-    storeItems := make(map[int]product)
-    storeItems[1] = product{ priceInCents: 1000, name: "Learn React Today" }
-    storeItems[2] = product{ priceInCents: 2000, name: "Learn Go Today" }
-
     err := r.ParseForm()
     if err != nil {
         fmt.Println("Error parsing form:", err)
         http.Error(w, "Error parsing form", http.StatusBadRequest)
         return
     }
-    productIds := r.Form["productIds"]
-    quantities := r.Form["quantities"]
+    productIds_str := r.Form["productIds"]
+    quantities_str := r.Form["quantities"]
 
-    fmt.Println("Product IDs:", productIds)
-    fmt.Println("Quantities:", quantities)
     var lineItems []*stripe.CheckoutSessionLineItemParams
-    for range productIds {
-        fmt.Println("Adding products")
-        // From every id get the product
+
+    productIds, err := utils.ConvertStringsToInts(productIds_str)
+    utils.CheckError(err)
+    quantities, err := utils.ConvertStringsToInts(quantities_str)
+    utils.CheckError(err)
+    products, err := models.GetProductsByIds(s.Db, productIds)
+
+    for i := range products {
         p := &stripe.CheckoutSessionLineItemParams{
             PriceData: &stripe.CheckoutSessionLineItemPriceDataParams{
                 Currency: stripe.String("eur"),
                 ProductData: &stripe.CheckoutSessionLineItemPriceDataProductDataParams {
-                    Name: stripe.String(storeItems[1].name),
+                    Name: stripe.String(products[i].Name),
                 },
-                UnitAmount: stripe.Int64(storeItems[1].priceInCents),
+                UnitAmount: stripe.Int64(int64(products[i].Price * 100)),
             },
-            Quantity: stripe.Int64(1),
+            Quantity: stripe.Int64(int64(quantities[i])),
         }
         lineItems = append(lineItems, p)
     }
                             
-	//products, _ := models.GetProducts()
     params := &stripe.CheckoutSessionParams{
     LineItems: lineItems,
     Mode: stripe.String("payment"),

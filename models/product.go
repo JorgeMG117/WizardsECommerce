@@ -41,6 +41,16 @@ func GetProductById(db *gorm.DB, id int) (*Product, error) {
     return &product, nil
 }
 
+func GetProductsByIds(db *gorm.DB, ids []int) ([]Product, error) {
+    var products []Product
+    err := db.Where("id IN ?", ids).Find(&products).Error
+    if err != nil {
+        return nil, err
+    }
+    return products, nil
+}
+
+
 func GetFeaturedProducts(db *gorm.DB) ([]Product, error) {
     p, e := GetProducts(db)
     return p, e
