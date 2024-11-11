@@ -21,7 +21,7 @@ func (s *Server) Product(w http.ResponseWriter, r *http.Request) {
         }
 
         // Fetch product details based on ID
-        product := models.GetProductById(id)
+        product, err := models.GetProductById(id)
         fmt.Println(product)
         // http.NotFound(w, r)
 
@@ -35,7 +35,7 @@ func (s *Server) Product(w http.ResponseWriter, r *http.Request) {
             Product          *models.Product
             FeaturedProducts []models.Product
         }{
-            Product:          &product,
+            Product:          product,
             FeaturedProducts: featuredProducts,
         }
 

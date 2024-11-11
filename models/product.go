@@ -43,19 +43,19 @@ func GetProducts() ([]Product, error) {
 	return products, nil
 }
 
-func GetProductById(id int) Product {
+func GetProductById(id int) (*Product, error) {
     products, err := GetProducts()
     utils.CheckError(err)
 
     for _, v := range products {
         if v.ID == id {
-            return v
+            return &v, nil
         }
     }
     
     fmt.Println("That product doesnt exist")
 
-    return products[0] 
+    return &products[0], nil 
 }
 
 func GetFeaturedProducts() ([]Product, error) {

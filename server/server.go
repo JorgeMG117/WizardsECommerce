@@ -7,10 +7,13 @@ import (
 	"log"
 	"net/http"
 	"time"
+    "encoding/gob"
+
     "github.com/alexedwards/scs/v2"
     "github.com/stripe/stripe-go/v81"
 
 	"github.com/JorgeMG117/WizardsECommerce/routes"
+	"github.com/JorgeMG117/WizardsECommerce/models"
 )
 
 func ExecServer() error {
@@ -38,6 +41,9 @@ func ExecServer() error {
     s.SessionManager.Cookie.Persist = true                          // Keep the cookie even after the browser is closed
 
 
+    gob.Register(models.Cart{})
+    gob.Register(models.CartItem{})
+    gob.Register(models.Product{})
 
 
 	// defer s.Db.Close()
