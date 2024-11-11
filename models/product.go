@@ -3,9 +3,8 @@ package models
 import (
 	"errors"
 	"fmt"
-	"os"
 
-	"github.com/JorgeMG117/WizardsECommerce/utils"
+    "gorm.io/gorm"
 )
 
 type Product struct {
@@ -19,51 +18,31 @@ type Product struct {
 	ImageURL    string  `json:"image_url"`
 }
 
-var productFile string = "data/products.json"
 
-func CreateProduct(product Product) error {
-	var products []Product
-	err := utils.ReadFile(productFile, &products)
-	if err != nil && !errors.Is(err, os.ErrNotExist) {
-		return err
-	}
-
-	product.ID = len(products) + 1
-	products = append(products, product)
-
-	return utils.WriteFile(productFile, products)
+func CreateProduct(db *gorm.DB, product *Product) error {
+    return db.Create(product).Error
 }
 
-func GetProducts() ([]Product, error) {
-	var products []Product
-	err := utils.ReadFile(productFile, &products)
-	if err != nil {
-		return nil, err
-	}
-	return products, nil
+func GetProducts(db *gorm.DB) ([]Product, error) {
+    var products []Product
+    err := db.Find(&products).Error
+    return products, err
 }
 
-func GetProductById(id int) (*Product, error) {
-    products, err := GetProducts()
-    utils.CheckError(err)
-
-    for _, v := range products {
-        if v.ID == id {
-            return &v, nil
+func GetProductById(db *gorm.DB, id int) (*Product, error) {
+    var product Product
+    err := db.First(&product, id).Error
+    if err != nil {
+        if errors.Is(err, gorm.ErrRecordNotFound) {
+            return nil, fmt.Errorf("product with ID %d not found", id)
         }
+        return nil, err
     }
-    
-    fmt.Println("That product doesnt exist")
-
-    return &products[0], nil 
+    return &product, nil
 }
 
-func GetFeaturedProducts() ([]Product, error) {
-	var products []Product
-	err := utils.ReadFile(productFile, &products)
-	if err != nil {
-		return nil, err
-	}
-	return products, nil
+func GetFeaturedProducts(db *gorm.DB) ([]Product, error) {
+    p, e := GetProducts(db)
+    return p, e
 }
 

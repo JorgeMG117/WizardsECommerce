@@ -14,7 +14,7 @@ func (s *Server) Products(w http.ResponseWriter, r *http.Request) {
 	case "GET":
 		s.mutex.Lock()
 
-		products, _ := models.GetProducts()
+		products, _ := models.GetProducts(s.Db)
 
 		s.mutex.Unlock()
 

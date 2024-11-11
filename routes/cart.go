@@ -58,7 +58,7 @@ func (s *Server) AddToCart(w http.ResponseWriter, r *http.Request) {
         }
     }
 
-    product, err := models.GetProductById(productId)
+    product, err := models.GetProductById(s.Db, productId)
     if err != nil {
         http.Error(w, "Product not found", http.StatusNotFound)
         return

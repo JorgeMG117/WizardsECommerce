@@ -8,15 +8,16 @@ import (
 	"sync"
 
 	"github.com/alexedwards/scs/v2"
+    "gorm.io/gorm"
 
 	"github.com/JorgeMG117/WizardsECommerce/middleware"
 	"github.com/JorgeMG117/WizardsECommerce/models"
 )
 
 type Server struct {
-	//Db          *sql.DB
-    SessionManager *scs.SessionManager
-	mutex sync.Mutex
+	Db              *gorm.DB
+    SessionManager  *scs.SessionManager
+	mutex           sync.Mutex
 }
 
 
@@ -92,7 +93,7 @@ func (s *Server) Router() http.Handler {
     })
 	mux.HandleFunc("/shop", func(w http.ResponseWriter, r *http.Request) {
 		s.mutex.Lock()
-		products, _ := models.GetProducts()
+		products, _ := models.GetProducts(s.Db)
 		s.mutex.Unlock()
         s.RenderTemplate(w, "shop.html", products)
     })

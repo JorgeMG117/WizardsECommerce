@@ -21,11 +21,11 @@ func (s *Server) Product(w http.ResponseWriter, r *http.Request) {
         }
 
         // Fetch product details based on ID
-        product, err := models.GetProductById(id)
+        product, err := models.GetProductById(s.Db, id)
         fmt.Println(product)
         // http.NotFound(w, r)
 
-        featuredProducts, err := models.GetFeaturedProducts()
+        featuredProducts, err := models.GetFeaturedProducts(s.Db)
         if err != nil {
             http.NotFound(w, r)
             return

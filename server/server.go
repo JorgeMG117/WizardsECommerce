@@ -14,6 +14,7 @@ import (
 
 	"github.com/JorgeMG117/WizardsECommerce/routes"
 	"github.com/JorgeMG117/WizardsECommerce/models"
+	"github.com/JorgeMG117/WizardsECommerce/configs"
 )
 
 func ExecServer() error {
@@ -29,7 +30,7 @@ func ExecServer() error {
     }
 
 	s := routes.Server{
-		// Db: configs.ConnectDB(),
+		Db: configs.ConnectDB(),
         SessionManager: scs.New(),
 	}
 
