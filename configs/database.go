@@ -2,6 +2,7 @@ package configs
 
 import (
     "log"
+    "os"
 
     "github.com/JorgeMG117/WizardsECommerce/models"
     "gorm.io/driver/sqlite"
@@ -9,6 +10,13 @@ import (
 )
 
 func ConnectDB() *gorm.DB {
+
+    if _, err := os.Stat("data"); os.IsNotExist(err) {
+        os.Mkdir("data", 0755)
+    }
+
+
+
     db, err := gorm.Open(sqlite.Open("data/ecommerce.db"), &gorm.Config{})
     if err != nil {
         log.Fatalf("Failed to connect to database: %v", err)

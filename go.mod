@@ -1,6 +1,6 @@
 module github.com/JorgeMG117/WizardsECommerce
 
-go 1.22.0
+go 1.20
 
 require (
 	github.com/alexedwards/scs/v2 v2.8.0 // indirect

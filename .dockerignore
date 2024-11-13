@@ -1,0 +1,11 @@
+# Ignore the Go build cache, binaries, and editor config files
+/build
+*.db
+*.sqlite
+*.sqlite3
+*.log
+.idea
+.vscode
+*.swp
+.env
+
