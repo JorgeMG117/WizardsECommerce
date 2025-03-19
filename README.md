@@ -8,8 +8,12 @@ I want to build a my backend in go and do server side rendering with htmx
 Here is the list of things I want to achive
 
 
-- [ ] HTTPS
-- [ ] Payments 
-- [ ] HTMX
+- [X] HTTPS
+- [X] Payments 
+- [X] HTMX
 - [ ] Nice logs
+- [ ] Product filters
+- [ ] Multi page in shop
 
+
+Once I want to checkout check if user is login and if not take to register page
